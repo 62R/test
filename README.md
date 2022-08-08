@@ -5,4 +5,4 @@
 
 node version v16.15.1
 
-Запуск с прослушиванием на localhost:4000 - npm run listen
+Запуск с прослушиванием на localhost:4000 - npm run listen или node server/server.js
