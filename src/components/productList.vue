@@ -78,16 +78,14 @@
         </li>
       </ul>
     </div>
-    <ul class="productList">
-      <transition-group name="listAnimation" class="productList" tag="ul">
-        <product-item
-          v-for="item in sorted"
-          :product="item"
-          :key="item.id"
-          @removeProduct="removeProduct"
-        />
-      </transition-group>
-    </ul>
+    <transition-group name="listAnimation" class="productList" tag="ul">
+      <product-item
+        v-for="item in sorted"
+        :product="item"
+        :key="item.id"
+        @removeProduct="removeProduct"
+      />
+    </transition-group>
   </section>
 </template>
 
@@ -223,6 +221,9 @@ export default {
 <style scoped lang="scss">
 .products {
   flex-grow: 1;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .sortList {
@@ -296,9 +297,10 @@ export default {
 }
 
 .productList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
+  margin: 0 auto;
 }
 .listAnimation-enter-active,
 .listAnimation-leave-active {
@@ -311,5 +313,17 @@ export default {
 }
 .list-move {
   transition: transform 1s;
+}
+
+@media (max-width: 1139px) {
+  .productList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 687px) {
+  .productList {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

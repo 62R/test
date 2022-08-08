@@ -38,6 +38,12 @@ body {
   gap: 16px;
 }
 
+@media (max-width: 1023px) {
+  #app {
+    flex-wrap: wrap;
+  }
+}
+
 //убираем стрелочки у инпутов типа номер
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

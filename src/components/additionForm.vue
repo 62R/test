@@ -159,10 +159,16 @@ export default {
   line-height: 15px;
 }
 
+.addindionSection {
+  width: 100%;
+}
+
 .additionForm {
   display: flex;
   flex-direction: column;
   position: sticky;
+
+  margin: 0 auto;
   top: 24px;
   width: 332px;
   padding: 24px;
@@ -299,5 +305,18 @@ export default {
   line-height: 10px;
   letter-spacing: -0.02em;
   color: #ff8484;
+}
+
+@media (max-width: 1139px) {
+  .additionForm {
+    top: 8px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .additionForm {
+    position: unset;
+    top: 8px;
+  }
 }
 </style>
