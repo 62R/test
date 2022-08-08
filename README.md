@@ -1,24 +1,8 @@
-# app
+Каталог с возможностью добавления, удаления элементов.
+Реализована валидация.
+Реализована сортировака по имени и цене.
+Реализовано сохранение в json.
 
-## Project setup
-```
-npm install
-```
+node version v16.15.1
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Запуск с прослушиванием на localhost:4000 - npm run listen
