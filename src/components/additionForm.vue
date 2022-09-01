@@ -8,25 +8,28 @@
       @input="checkValid"
     >
       <fieldset class="inputField">
-        <label for="name" class="inputLabel">
+        <label for="name"
+               class="inputLabel">
           Наименование товара
           <span class="dot"></span>
         </label>
         <input
           v-model="product.name"
-          @input="checkInput('name')"
           class="inputElement"
           name="name"
           type="text"
           placeholder="Введите наименование товара"
+          @input="checkInput('name')"
         />
-        <span class="inputError" v-show="errorMsg.name">
+        <span v-show="errorMsg.name"
+              class="inputError">
           Поле является обязательным
         </span>
       </fieldset>
 
       <fieldset class="inputField">
-        <label for="discription" class="inputLabel">Описание товара</label>
+        <label for="discription"
+               class="inputLabel">Описание товара</label>
         <textarea
           v-model="product.discription"
           class="textareaElement"
@@ -36,37 +39,41 @@
       </fieldset>
 
       <fieldset class="inputField">
-        <label for="link" class="inputLabel">
+        <label for="link"
+               class="inputLabel">
           Ссылка на изображение товара
           <span class="dot"></span>
         </label>
         <input
           v-model="product.link"
-          @input="checkInput('link')"
           class="inputElement"
           name="link"
           type="url"
           placeholder="Введите ссылку"
+          @input="checkInput('link')"
         />
-        <span class="inputError" v-show="errorMsg.link">
+        <span v-show="errorMsg.link"
+              class="inputError">
           Поле является обязательным
         </span>
       </fieldset>
 
       <fieldset class="inputField">
-        <label for="price" class="inputLabel">
+        <label for="price"
+               class="inputLabel">
           Цена товара
           <span class="dot"></span>
         </label>
         <input
           v-model="product.price"
-          @input="checkInput('price')"
           class="inputElement"
           name="price"
           type="number"
           placeholder="Введите цену"
+          @input="checkInput('price')"
         />
-        <span class="inputError" v-show="errorMsg.price">
+        <span v-show="errorMsg.price"
+              class="inputError">
           Поле является обязательным
         </span>
       </fieldset>
@@ -84,7 +91,8 @@
 
 <script>
 export default {
-  name: "additionForm",
+  name: "AdditionForm",
+  props: {},
   data() {
     return {
       product: {
@@ -102,7 +110,6 @@ export default {
       isPush: false,
     };
   },
-  props: {},
   methods: {
     checkValid() {
       for (let item in this.errorMsg) {

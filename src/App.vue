@@ -4,14 +4,14 @@
 </template>
 
 <script>
-import additionForm from "./components/additionForm.vue";
-import productList from "./components/productList.vue";
+import AdditionForm from "./components/AdditionForm.vue";
+import ProductList from "./components/ProductList.vue";
 
 export default {
   name: "App",
   components: {
-    additionForm,
-    productList,
+    AdditionForm,
+    ProductList,
   },
 };
 </script>

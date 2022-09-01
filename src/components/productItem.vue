@@ -4,7 +4,9 @@
     @mouseover="showRemove = !showRemove"
     @mouseout="showRemove = !showRemove"
   >
-    <img class="productImg" :src="product.link" :alt="product.name" />
+    <img class="productImg"
+         :src="product.link"
+         :alt="product.name" />
     <div class="infoWrap">
       <h3 class="productHeader">{{ product.name }}</h3>
       <p class="productInfo">{{ product.discription }}</p>
@@ -45,7 +47,9 @@
         </g>
         <defs>
           <clipPath id="clip0_4_349">
-            <rect width="16" height="16" fill="white" />
+            <rect width="16"
+                  height="16"
+                  fill="white" />
           </clipPath>
         </defs>
       </svg>
@@ -55,7 +59,7 @@
 
 <script>
 export default {
-  name: "productItem",
+  name: "ProductItem",
   props: {
     product: {
       id: String,
