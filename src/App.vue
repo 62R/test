@@ -4,8 +4,9 @@
 </template>
 
 <script>
-import AdditionForm from "./components/AdditionForm.vue";
+  
 import ProductList from "./components/ProductList.vue";
+import AdditionForm from "./components/AdditionForm.vue";
 
 export default {
   name: "App",

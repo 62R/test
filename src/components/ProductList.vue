@@ -106,7 +106,7 @@ export default {
       sorted: [],
       sortIsOpen: false,
       sortReq: "",
-      api: "/api/products",
+      api: "http://localhost:4000/api/products",
     };
   },
   mounted() {
