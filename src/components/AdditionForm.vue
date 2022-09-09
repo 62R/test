@@ -1,87 +1,88 @@
 <template>
-  <section class="addindionSection">
+  <section class="addindion-section">
     <h2 class="header">Добавление товара</h2>
     <form
-      class="additionForm"
-      :class="{ additionForm_pushed: isPush }"
+      class="addition-form"
+      :class="{ 'addition-form_pushed': isPush }"
       @submit.prevent="validate"
       @input="checkValid"
     >
-      <fieldset class="inputField">
+      <fieldset class="input-field">
         <label for="name"
-               class="inputLabel">
+               class="input-label">
           Наименование товара
           <span class="dot"></span>
         </label>
         <input
           v-model="product.name"
-          class="inputElement"
+          class="input-element"
           name="name"
           type="text"
           placeholder="Введите наименование товара"
           @input="checkInput('name')"
         />
         <span v-show="errorMsg.name"
-              class="inputError">
+              class="input-error">
           Поле является обязательным
         </span>
       </fieldset>
 
-      <fieldset class="inputField">
+      <fieldset class="input-field">
         <label for="discription"
-               class="inputLabel">Описание товара</label>
+               class="input-label">Описание товара</label>
         <textarea
           v-model="product.discription"
-          class="textareaElement"
+          class="textarea-element"
           name="discription"
           placeholder="Введите описание товара"
         ></textarea>
       </fieldset>
 
-      <fieldset class="inputField">
+      <fieldset class="input-field">
         <label for="link"
-               class="inputLabel">
+               class="input-label">
           Ссылка на изображение товара
           <span class="dot"></span>
         </label>
         <input
           v-model="product.link"
-          class="inputElement"
+          class="input-element"
           name="link"
           type="url"
           placeholder="Введите ссылку"
           @input="checkInput('link')"
         />
         <span v-show="errorMsg.link"
-              class="inputError">
+              class="input-error">
           Поле является обязательным
         </span>
       </fieldset>
 
-      <fieldset class="inputField">
+      <fieldset class="input-field">
         <label for="price"
-               class="inputLabel">
+               class="input-label">
           Цена товара
           <span class="dot"></span>
         </label>
         <input
-          v-model="product.price"
-          class="inputElement"
-          name="price"
-          type="number"
+          v-model="modelPrice"
+          class="input-element"
+          name="price"          
           placeholder="Введите цену"
           @input="checkInput('price')"
+          @focus="isChange = true"
+          @blur="isChange = false"
         />
         <span v-show="errorMsg.price"
-              class="inputError">
+              class="input-error">
           Поле является обязательным
         </span>
       </fieldset>
 
       <button
-        class="submitBtn"
+        class="submit-btn"
         type="submit"
-        :class="{ submitBtn_disable: !isValid, submitBtn_active: isValid }"
+        :class="{ 'submit-btn_disable': !isValid, 'submit-btn_active':isValid}"
       >
         Добавить товар
       </button>
@@ -108,7 +109,22 @@ export default {
       },
       isValid: false,
       isPush: false,
+      isChange: false,
     };
+  },
+  computed: {
+    modelPrice: {
+      get() {
+        return this.isChange ? this.product.price : this.$filters.priceWithSpace(this.product.price);
+      },
+      set(value) {
+        const newPrice = +value.replace(/\s/g, "");
+        if (!isNaN(newPrice)) {
+          this.product.price = newPrice;
+          this.$emit('input', this.product.price); 
+        }
+      },
+    },
   },
   methods: {
     checkValid() {
@@ -158,7 +174,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@mixin inputStyle {
+@mixin input-style {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
@@ -166,11 +182,11 @@ export default {
   line-height: 15px;
 }
 
-.addindionSection {
+.addindion-section {
   width: 100%;
 }
 
-.additionForm {
+.addition-form {
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -200,10 +216,11 @@ export default {
   line-height: 35px;
   color: #3f3f3f;
 }
-.submitBtn {
+.submit-btn {
   padding: 11px 95px;
   border: none;
   border-radius: 10px;
+  margin-top: 8px;
 
   font-family: "Inter";
   font-style: normal;
@@ -237,7 +254,7 @@ export default {
     }
   }
 }
-.inputField {
+.input-field {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -247,7 +264,7 @@ export default {
   margin: none;
   padding: 0 0 16px 0;
 }
-.inputLabel {
+.input-label {
   position: relative;
 
   text-align: left;
@@ -267,8 +284,8 @@ export default {
   background: #ff8484;
   border-radius: 4px;
 }
-.inputElement {
-  @include inputStyle();
+.input-element {
+  @include input-style();
   padding: 10px 16px;
 
   border: 1px solid transparent;
@@ -278,15 +295,15 @@ export default {
 
   color: #3f3f3f;
   &::placeholder {
-    @include inputStyle();
+    @include input-style();
     color: #b4b4b4;
   }
   &_error {
     border-color: #ff8484;
   }
 }
-.textareaElement {
-  @include inputStyle();
+.textarea-element {
+  @include input-style();
 
   height: 108px;
   padding: 10px 16px;
@@ -299,11 +316,11 @@ export default {
 
   color: #3f3f3f;
   &::placeholder {
-    @include inputStyle();
+    @include input-style();
     color: #b4b4b4;
   }
 }
-.inputError {
+.input-error {
   position: absolute;
   bottom: 2px;
 
@@ -315,13 +332,13 @@ export default {
 }
 
 @media (max-width: 1139px) {
-  .additionForm {
+  .addition-form {
     top: 8px;
   }
 }
 
 @media (max-width: 1023px) {
-  .additionForm {
+  .addition-form {
     position: unset;
     top: 8px;
   }

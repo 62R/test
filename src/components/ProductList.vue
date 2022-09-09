@@ -1,14 +1,16 @@
 <template>
   <section class="products">
-    <div class="sortList__wrap">
+    <div class="sort-list__wrap">
       <ul
-        class="sortList"
-        :class="{ sortList_open: sortIsOpen }"
+        class="sort-list"
+        :class="{ 'sort-list_open': sortIsOpen }"
         @click="sortIsOpen = !sortIsOpen"
+        @mouseout="sortIsOpen = false"
+        @mouseover="sortIsOpen = true"
       >
         <li
-          class="sortList__li sortList__li_disable"
-          :class="{ sortList__li_select: '' === sortReq }"
+          class="sort-list__li sort-list__li_disable"
+          :class="{ 'sort-list__li_select': '' === sortReq }"
         >
           По умолчанию
           <svg
@@ -25,8 +27,8 @@
           </svg>
         </li>
         <li
-          class="sortList__li"
-          :class="{ sortList__li_select: 'nameAToZ' === sortReq }"
+          class="sort-list__li"
+          :class="{ 'sort-list__li_select': 'nameAToZ' === sortReq }"
           @click="changeSortReq('nameAToZ')"
         >
           По имени
@@ -39,8 +41,8 @@
           </svg>
         </li>
         <li
-          class="sortList__li"
-          :class="{ sortList__li_select: 'nameZToA' === sortReq }"
+          class="sort-list__li"
+          :class="{ 'sort-list__li_select': 'nameZToA' === sortReq }"
           @click="changeSortReq('nameZToA')"
         >
           По имени
@@ -53,8 +55,8 @@
           </svg>
         </li>
         <li
-          class="sortList__li"
-          :class="{ sortList__li_select: 'priceToLow' === sortReq }"
+          class="sort-list__li"
+          :class="{ 'sort-list__li_select': 'priceToLow' === sortReq }"
           @click="changeSortReq('priceToLow')"
         >
           По цене
@@ -67,8 +69,8 @@
           </svg>
         </li>
         <li
-          class="sortList__li"
-          :class="{ sortList__li_select: 'priceToHigh' === sortReq }"
+          class="sort-list__li"
+          :class="{ 'sort-list__li_select': 'priceToHigh' === sortReq }"
           @click="changeSortReq('priceToHigh')"
         >
           По цене
@@ -83,7 +85,7 @@
       </ul>
     </div>
     <transition-group name="listAnimation"
-                      class="productList"
+                      class="product-list"
                       tag="ul">
       <product-item
         v-for="item in sorted"
@@ -111,9 +113,7 @@ export default {
   },
   mounted() {
     this.getJson(this.api).then((data) => {
-      for (let el of data) {
-        this.products.push(el);
-      }
+      this.products.push(...data);
       this.sortProduct();
     });
   },
@@ -232,7 +232,7 @@ export default {
   flex-direction: column;
 }
 
-.sortList {
+.sort-list {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -246,7 +246,7 @@ export default {
   transition: all 0.3s;
 
   &_open {
-    & .sortList__li {
+    & .sort-list__li {
       display: flex;
     }
   }
@@ -302,7 +302,7 @@ export default {
   }
 }
 
-.productList {
+.product-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
@@ -322,13 +322,13 @@ export default {
 }
 
 @media (max-width: 1139px) {
-  .productList {
+  .product-list {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 687px) {
-  .productList {
+  .product-list {
     grid-template-columns: 1fr;
   }
 }

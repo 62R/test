@@ -1,24 +1,24 @@
 <template>
   <li
-    class="productItem"
+    class="product-item"
     @mouseover="showRemove = !showRemove"
     @mouseout="showRemove = !showRemove"
   >
-    <img class="productImg"
+    <img class="product-img"
          :src="product.link"
          :alt="product.name" />
-    <div class="infoWrap">
-      <h3 class="productHeader">{{ product.name }}</h3>
-      <p class="productInfo">{{ product.discription }}</p>
-      <p class="productPrice">
-        {{ formatPrice(product.price) }}
+    <div class="info-wrap">
+      <h3 class="product-header">{{ product.name }}</h3>
+      <p class="product-info">{{ product.discription }}</p>
+      <p class="product-price">
+        {{ $filters.priceWithSpace(product.price) }}
         руб.
       </p>
     </div>
     <button
-      class="trashBtn"
+      class="trash-btn"
       type="button"
-      :class="{ trashBtn_active: showRemove }"
+      :class="{ 'trash-btn_active': showRemove }"
       @click="$emit('removeProduct', product.id)"
     >
       <svg
@@ -71,17 +71,12 @@ export default {
   },
   data() {
     return { showRemove: false };
-  },
-  methods: {
-    formatPrice(price) {
-      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    },
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.productItem {
+.product-item {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -111,7 +106,7 @@ export default {
     cursor: pointer;
   }
 }
-.productImg {
+.product-img {
   display: block;
   width: 100%;
   height: 200px;
@@ -119,7 +114,7 @@ export default {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-.trashBtn {
+.trash-btn {
   position: absolute;
   top: -8px;
   right: -8px;
@@ -147,28 +142,29 @@ export default {
   }
 }
 
-.infoWrap {
+.info-wrap {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  flex-grow: 1;
   margin: 16px 16px 24px 16px;
 }
-.productHeader {
+.product-header {
   font-weight: 600;
   font-size: 20px;
   line-height: 25px;
+  margin-bottom: 16px;
   color: #3f3f3f;
 }
-.productInfo {
+.product-info {
   display: block;
   flex-grow: 1;
   font-weight: 400;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 20px;  
+  margin-bottom: 32px;
   color: #3f3f3f;
 }
-.productPrice {
+.product-price {
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
